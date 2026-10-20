@@ -1,0 +1,46 @@
+logging:
+  file:
+    enable: true
+    level: INFO
+    path: logs
+    rotation: "10 MB"
+    retention: "7 days"
+  console:
+    enable: true
+    level: INFO
+
+db_meta:
+  host: 192.168.10.129
+  port: 3306
+  user: root
+  password: root
+  database: meta
+
+db_dw:
+  host: 192.168.10.129
+  port: 3306
+  user: root
+  password: root
+  database: dw
+
+qdrant:
+  host: 192.168.10.129
+  port: 6333
+  embedding_size: 1024
+
+embedding:
+  host: 192.168.10.129
+  port: 8081
+  model: BAAI/bge-large-zh-v1.5
+
+
+es:
+  host: 192.168.10.129
+  port: 9200
+  index_name: data_agent
+
+
+llm:
+  model_name: deepseek-flash
+  api_key: <deepseek_api_key>
+  base_url: https://api.deepseek.com
