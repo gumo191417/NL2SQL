@@ -19,8 +19,8 @@ db_meta:
 db_dw:
   host: 192.168.10.129
   port: 3306
-  user: root
-  password: root
+  user: atguigu
+  password: Atguigu.123
   database: dw
 
 qdrant:
