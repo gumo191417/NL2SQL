@@ -2,7 +2,7 @@ import asyncio
 from typing import Union
 
 from sqlalchemy import text
-from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine, AsyncSession
+from sqlalchemy.ext.asyncio import AsyncEngine, create_async_engine, AsyncSession, async_sessionmaker
 
 from app.conf.app_config import DBConfig, app_config
 
@@ -11,6 +11,7 @@ class MysqlClientManager:
     def __init__(self,db_config: DBConfig):
         self.db_config = db_config
         self.engine :Union[AsyncEngine,None] = None
+        self.session_factory: async_sessionmaker[AsyncSession] | None = None
 
     def _get_url(self):
         return (f"mysql+asyncmy://{self.db_config.user}:{self.db_config.password}@{self.db_config.host}:"
@@ -21,6 +22,11 @@ class MysqlClientManager:
             self._get_url(),
             pool_size =10,
             pool_pre_ping = 10
+        )
+        self.session_factory = async_sessionmaker(  # ← 新增，必须在 init 里
+            bind=self.engine,
+            class_=AsyncSession,
+            expire_on_commit=False,  # 避免 commit 后访问对象属性触发隐式 IO
         )
 
     async def close(self):

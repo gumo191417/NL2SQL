@@ -22,8 +22,9 @@ class ESClientManager:
     async def close(self):
         await self.client.close()
 
-es_client_manager = ESClientManager(app_config.es)
+
 if __name__ == '__main__':
+    es_client_manager = ESClientManager(app_config.es)
     es_client_manager.init()
 
     async def test():

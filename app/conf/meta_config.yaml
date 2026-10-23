@@ -53,6 +53,7 @@ tables:
         description: 客户会员等级。
         alias: [ 会员等级, 用户等级 ]
         sync: true
+
   - name: dim_product
     role: dim
     description: 商品维度表，描述商品的基本属性信息。
